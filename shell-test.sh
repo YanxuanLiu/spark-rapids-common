@@ -5,18 +5,17 @@
 # Basic Syntax Errors (detectable by both bash -n and shellcheck)
 # =====================
 
-# 1. Unmatched quotes
-echo "Hello World   # Error: Missing closing quote
 
-# 2. Unclosed control structure
+
+# 1. Unclosed control structure
 if [ -f "test_file.txt" ]; then
   echo "File exists"
 # Error: Missing 'fi'
 
-# 3. Incomplete pipe command
+# 2. Incomplete pipe command
 cat "some_file.txt" |   # Error: Nothing after pipe
 
-# 4. Unclosed function
+# 3. Unclosed function
 function test_function {
   echo "Inside function"
 # Error: Missing '}'
@@ -25,23 +24,23 @@ function test_function {
 # Semantic Errors (primarily detected by shellcheck)
 # =====================
 
-# 5. Unquoted variable with spaces
+# 4. Unquoted variable with spaces
 filename="file with spaces.txt"
 rm $filename  # Error: Should be rm "$filename"
 
-# 6. Misuse of exit status
+# 5. Misuse of exit status
 grep "pattern" "some_file.txt"
 if [ $? = 0 ]; then  # Error: Should use if grep -q "pattern" file.txt
   echo "Pattern found"
 fi
 
-# 7. Uninitialized variable
+# 6. Uninitialized variable
 echo "Value: $undefined_var"  # Error: Variable never defined
 
-# 8. Arithmetic expression error
+# 7. Arithmetic expression error
 count=5+3  # Error: Should be count=$((5+3))
 
-# 9. Test expression error
+# 8. Test expression error
 var="value"
 if [ "$var" = value ]; then  # Error: value should be quoted
   echo "Equal"
@@ -51,21 +50,21 @@ fi
 # Security/Best Practice Issues (shellcheck only)
 # =====================
 
-# 10. Command injection risk
+# 9. Command injection risk
 user_input="; echo 'malicious command'"
 ls $user_input  # Error: Should use ls -- "$user_input"
 
-# 11. Inefficient loop
+# 10. Inefficient loop
 for file in $(ls *.txt); do  # Error: Should use for file in *.txt
   echo "$file"
 done
 
-# 12. Constant conditional
+# 11. Constant conditional
 if [[ 1 -eq 1 ]]; then  # Error: Always true
   echo "Always true"
 fi
 
-# 13. Unclosed file descriptor
+# 12. Unclosed file descriptor
 exec 3< "input.txt"
 # Error: Missing exec 3>&-
 
@@ -73,13 +72,13 @@ exec 3< "input.txt"
 # Portability Issues (shellcheck only)
 # =====================
 
-# 14. Bashism in sh script
+# 13. Bashism in sh script
 (
   #!/bin/sh
   echo {1..10}  # Error: {} expansion invalid in POSIX sh
 )
 
-# 15. Incompatible test syntax
+# 14. Incompatible test syntax
 (
   #!/bin/sh
   if [[ $var == "test" ]]; then  # Error: [[ ]] is bash-specific
@@ -91,11 +90,11 @@ exec 3< "input.txt"
 # Compound Error Section
 # =====================
 
-# 16. Multiple compound errors
+# 15. Multiple compound errors
 echo "Starting complex error section"
 
 # Unmatched quotes
-echo "Unclosed quote
+
 
 # Uninitialized variable + unquoted
 if [ $debug_mode = "true" ]; then
@@ -111,6 +110,8 @@ find . -name $user_input
 # Unclosed loop
 for item in {1..5}; do
   echo "Processing $item"
+
+echo "Unclosed quote
 
 # =====================
 # Cleanup (no actual errors)
