@@ -110,7 +110,7 @@ find . -name $user_input
 # Unclosed loop
 for item in {1..5}; do
   echo "Processing $item"
-do
+done
 
 echo "Unclosed quote"
 
