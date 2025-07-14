@@ -124,6 +124,6 @@ echo "All errors are intentional test cases"
 exit 0
 
 IS_SPARK_35X=0
-if [ "IS_SPARK_35X" -ne "1" ]; then
+if [[ "IS_SPARK_35X" -ne "1" ]]; then
   echo "test"
 fi
