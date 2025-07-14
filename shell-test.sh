@@ -111,7 +111,7 @@ find . -name $user_input
 for item in {1..5}; do
   echo "Processing $item"
 
-echo "Unclosed quote
+echo "Unclosed quote"
 
 # =====================
 # Cleanup (no actual errors)
