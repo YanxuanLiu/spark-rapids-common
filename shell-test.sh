@@ -124,6 +124,6 @@
 # exit 0
 
 IS_SPARK_35X=1
-if [[ "IS_SPARK_35X" -ne "1" ]]; then
+if [[ $IS_SPARK_35X -ne "1" ]]; then
   echo "!!!! Skipping Iceberg tests. GPU acceleration of Iceberg is not supported on $ICEBERG_SPARK_VER"
 fi
