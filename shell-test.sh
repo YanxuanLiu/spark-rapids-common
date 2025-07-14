@@ -10,6 +10,7 @@
 # 1. Unclosed control structure
 if [ -f "test_file.txt" ]; then
   echo "File exists"
+fi
 # Error: Missing 'fi'
 
 # 2. Incomplete pipe command
