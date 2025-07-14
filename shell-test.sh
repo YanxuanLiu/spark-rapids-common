@@ -115,10 +115,15 @@ for item in {1..5}; do
   echo "Processing $item"
 done
 
-echo "Unclosed quote
+echo "Unclosed quote"
 
 # =====================
 # Cleanup (no actual errors)
 # =====================
 echo "All errors are intentional test cases"
 exit 0
+
+IS_SPARK_35X=1
+if [[ "IS_SPARK_35X" -ne "1" ]]; then
+  echo "!!!! Skipping Iceberg tests. GPU acceleration of Iceberg is not supported on $ICEBERG_SPARK_VER"
+fi
