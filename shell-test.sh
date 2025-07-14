@@ -115,7 +115,7 @@ for item in {1..5}; do
   echo "Processing $item"
 done
 
-echo "Unclosed quote"
+echo "Unclosed quote
 
 # =====================
 # Cleanup (no actual errors)
