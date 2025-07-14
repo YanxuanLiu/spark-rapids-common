@@ -18,6 +18,7 @@ cat "some_file.txt" |   # Error: Nothing after pipe
 # 3. Unclosed function
 function test_function {
   echo "Inside function"
+}
 # Error: Missing '}'
 
 # =====================
