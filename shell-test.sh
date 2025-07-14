@@ -14,7 +14,7 @@ fi
 # Error: Missing 'fi'
 
 # 2. Incomplete pipe command
-cat "some_file.txt" |   # Error: Nothing after pipe
+cat "some_file.txt"  # Error: Nothing after pipe
 
 # 3. Unclosed function
 function test_function {
@@ -28,19 +28,20 @@ function test_function {
 
 # 4. Unquoted variable with spaces
 filename="file with spaces.txt"
-rm $filename  # Error: Should be rm "$filename"
+rm "$filename"  # Error: Should be rm "$filename"
 
 # 5. Misuse of exit status
 grep "pattern" "some_file.txt"
-if [ $? = 0 ]; then  # Error: Should use if grep -q "pattern" file.txt
+if $(grep -q "pattern" "some_file.txt"); then  # Error: Should use if grep -q "pattern" file.txt
   echo "Pattern found"
 fi
 
 # 6. Uninitialized variable
+undefined_var=1
 echo "Value: $undefined_var"  # Error: Variable never defined
 
 # 7. Arithmetic expression error
-count=5+3  # Error: Should be count=$((5+3))
+count=$((5+3))  # Error: Should be count=$((5+3))
 
 # 8. Test expression error
 var="value"
@@ -54,10 +55,10 @@ fi
 
 # 9. Command injection risk
 user_input="; echo 'malicious command'"
-ls $user_input  # Error: Should use ls -- "$user_input"
+ls -- "$user_input"  # Error: Should use ls -- "$user_input"
 
 # 10. Inefficient loop
-for file in $(ls *.txt); do  # Error: Should use for file in *.txt
+for file in *.txt; do  # Error: Should use for file in *.txt
   echo "$file"
 done
 
