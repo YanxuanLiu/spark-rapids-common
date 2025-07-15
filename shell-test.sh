@@ -7,113 +7,113 @@
 
 
 
-# # 1. Unclosed control structure
-# if [ -f "test_file.txt" ]; then
-#   echo "File exists"
-# fi
-# # Error: Missing 'fi'
+# 1. Unclosed control structure
+if [ -f "test_file.txt" ]; then
+  echo "File exists"
+fi
+# Error: Missing 'fi'
 
-# # 2. Incomplete pipe command
-# cat "some_file.txt"  # Error: Nothing after pipe
+# 2. Incomplete pipe command
+cat "some_file.txt"  # Error: Nothing after pipe
 
-# # 3. Unclosed function
-# function test_function {
-#   echo "Inside function"
-# }
-# # Error: Missing '}'
+# 3. Unclosed function
+function test_function {
+  echo "Inside function"
+}
+# Error: Missing '}'
 
-# # =====================
-# # Semantic Errors (primarily detected by shellcheck)
-# # =====================
+# =====================
+# Semantic Errors (primarily detected by shellcheck)
+# =====================
 
-# # 4. Unquoted variable with spaces
-# filename="file with spaces.txt"
-# rm "$filename"  # Error: Should be rm "$filename"
+# 4. Unquoted variable with spaces
+filename="file with spaces.txt"
+rm "$filename"  # Error: Should be rm "$filename"
 
-# # 5. Misuse of exit status
-# grep "pattern" "some_file.txt"
-# if $(grep -q "pattern" "some_file.txt"); then  # Error: Should use if grep -q "pattern" file.txt
-#   echo "Pattern found"
-# fi
+# 5. Misuse of exit status
+grep "pattern" "some_file.txt"
+if $(grep -q "pattern" "some_file.txt"); then  # Error: Should use if grep -q "pattern" file.txt
+  echo "Pattern found"
+fi
 
-# # 6. Uninitialized variable
-# undefined_var=1
-# echo "Value: $undefined_var"  # Error: Variable never defined
+# 6. Uninitialized variable
+undefined_var=1
+echo "Value: $undefined_var"  # Error: Variable never defined
 
-# # 7. Arithmetic expression error
-# count=$((5+3))  # Error: Should be count=$((5+3))
+# 7. Arithmetic expression error
+count=$((5+3))  # Error: Should be count=$((5+3))
 
-# # 8. Test expression error
-# var="value"
-# if [ "$var" = value ]; then  # Error: value should be quoted
-#   echo "Equal"
-# fi
+# 8. Test expression error
+var="value"
+if [ "$var" = value ]; then  # Error: value should be quoted
+  echo "Equal"
+fi
 
-# # =====================
-# # Security/Best Practice Issues (shellcheck only)
-# # =====================
+# =====================
+# Security/Best Practice Issues (shellcheck only)
+# =====================
 
-# # 9. Command injection risk
-# user_input="; echo 'malicious command'"
-# ls -- "$user_input"  # Error: Should use ls -- "$user_input"
+# 9. Command injection risk
+user_input="; echo 'malicious command'"
+ls -- "$user_input"  # Error: Should use ls -- "$user_input"
 
-# # 10. Inefficient loop
-# for file in *.txt; do  # Error: Should use for file in *.txt
-#   echo "$file"
-# done
+# 10. Inefficient loop
+for file in *.txt; do  # Error: Should use for file in *.txt
+  echo "$file"
+done
 
-# # 11. Constant conditional
-# if [[ 1 -eq 1 ]]; then  # Error: Always true
-#   echo "Always true"
-# fi
+# 11. Constant conditional
+if [[ 1 -eq 1 ]]; then  # Error: Always true
+  echo "Always true"
+fi
 
-# # 12. Unclosed file descriptor
-# exec 3< "input.txt"
-# # Error: Missing exec 3>&-
+# 12. Unclosed file descriptor
+exec 3< "input.txt"
+# Error: Missing exec 3>&-
 
-# # =====================
-# # Portability Issues (shellcheck only)
-# # =====================
+# =====================
+# Portability Issues (shellcheck only)
+# =====================
 
-# # 13. Bashism in sh script
-# (
-#   #!/bin/sh
-#   echo {1..10}  # Error: {} expansion invalid in POSIX sh
-# )
+# 13. Bashism in sh script
+(
+  #!/bin/sh
+  echo {1..10}  # Error: {} expansion invalid in POSIX sh
+)
 
-# # 14. Incompatible test syntax
-# (
-#   #!/bin/sh
-#   if [[ $var == "test" ]]; then  # Error: [[ ]] is bash-specific
-#     echo "Match"
-#   fi
-# )
+# 14. Incompatible test syntax
+(
+  #!/bin/sh
+  if [[ $var == "test" ]]; then  # Error: [[ ]] is bash-specific
+    echo "Match"
+  fi
+)
 
-# # =====================
-# # Compound Error Section
-# # =====================
+# =====================
+# Compound Error Section
+# =====================
 
-# # 15. Multiple compound errors
-# echo "Starting complex error section"
+# 15. Multiple compound errors
+echo "Starting complex error section"
 
-# # Unmatched quotes
+# Unmatched quotes
 
 
-# # Uninitialized variable + unquoted
-# if [ $debug_mode = "true" ]; then
-#   echo "Debug mode"
-# fi
+# Uninitialized variable + unquoted
+if [ $debug_mode = "true" ]; then
+  echo "Debug mode"
+fi
 
-# # Broken pipe
-# cat /var/log/syslog | 
+# Broken pipe
+cat /var/log/syslog | 
 
-# # Security risk
-# find . -name $user_input
+# Security risk
+find . -name $user_input
 
-# # Unclosed loop
-# for item in {1..5}; do
-#   echo "Processing $item"
-# done
+# Unclosed loop
+for item in {1..5}; do
+  echo "Processing $item"
+done
 
 echo "Unclosed quote"
 
