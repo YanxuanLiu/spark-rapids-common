@@ -16,7 +16,7 @@
 # echo "${ARGS[@]}"
 
 SKIP_TESTS="TRUE"
-if [[ $( echo ${SKIP_TESTS} | tr '[:upper:]' '[:lower:]' ) == "true" ]];
+if [[ $( echo ${SKIP_TESTS} | tr [:upper:] [:lower:] ) == "true" ]];
 then
     echo "PYTHON INTEGRATION TESTS SKIPPED..."
 fi
