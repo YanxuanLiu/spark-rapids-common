@@ -12,20 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A workflow to check shell script syntax
-name: shell check
+name: 'Checkout'
+description: 'Checkout code'
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-
-jobs:
-  shell-check:
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.pull_request.title, '[bot]')"
-    steps:
-      - name: Checkout code
-        uses: YanxuanLiu/spark-rapids-common/checkout@shellcheck
-
-      - name: Run ShellCheck
-        uses: NVIDIA/spark-rapids-common/shell-check@main
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
