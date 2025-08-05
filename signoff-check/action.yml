@@ -36,7 +36,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout repository
-      uses: NVIDIA/spark-rapids-common/checkout@main
+      uses: YanxuanLiu/spark-rapids-common/checkout@checkout-wrapper
       with:
         repository: NVIDIA/spark-rapids-common
         ref: main
