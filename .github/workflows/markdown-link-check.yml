@@ -30,3 +30,6 @@ jobs:
 
       - name: Run Markdown Link Check
         uses: YanxuanLiu/spark-rapids-common/markdown-link-check@check-markdown
+        with:
+          max-depth: -1
+          use-verbose-mode: 'yes'
