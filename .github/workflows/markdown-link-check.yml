@@ -29,7 +29,7 @@ jobs:
         uses: NVIDIA/spark-rapids-common/checkout@main
 
       - name: Run Markdown Link Check
-        uses: YanxuanLiu/spark-rapids-common/markdown-link-check@change-markdown-version
+        uses: YanxuanLiu/spark-rapids-common/markdown-link-check@markdown-check-sha
         with:
           max-depth: -1
           use-verbose-mode: 'yes'
