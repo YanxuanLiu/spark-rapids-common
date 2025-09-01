@@ -63,6 +63,8 @@ runs:
         base-branch: ${{ inputs.base-branch }}
         file-extension: ${{ inputs.file-extension }}
         file-path: ${{ inputs.file-path }}
+      run: |
+        echo "${{ steps.markdown-link-check.outputs }}" > markdown_link_check.log
     
     - name: Summarize results
       shell: bash
@@ -76,6 +78,12 @@ runs:
         files=()
         summaries=()
         in_summary_section=0 # 0: not in summary section, 1: in summary section
+
+        LOG_FILE="markdown_link_check.log"
+        if [ ! -f "$LOG_FILE" ]; then
+            echo "No log file found. Cannot summarize results."
+            exit 0
+        fi
         
         # Process output line by line
         while IFS= read -r line; do
@@ -104,7 +112,7 @@ runs:
                     has_errors=1
                 fi
             fi
-        done <<< "$MLC_OUTPUT" # The output of the markdown link check action
+        done <<< "$LOG_FILE"
         
         # Output final conclusion
         if [ $has_errors -eq 0 ]; then
