@@ -65,6 +65,7 @@ runs:
         file-path: ${{ inputs.file-path }}
 
     - name: Check environment variables length
+      shell: bash
       run: |
         printenv | awk -F= '{ print "Variable:", $1, "Length:", length($0) }' | sort -k4 -nr
         for var in $(printenv | cut -d= -f1); do
