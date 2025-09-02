@@ -62,4 +62,14 @@ runs:
         check-modified-files-only: ${{ inputs.check-modified-files-only }}
         base-branch: ${{ inputs.base-branch }}
         file-extension: ${{ inputs.file-extension }}
-        # file-path: ${{ inputs.file-path }}
+        file-path: ${{ inputs.file-path }}
+
+    - name: Check environment variables length
+      run: |
+        printenv | awk -F= '{ print "Variable:", $1, "Length:", length($0) }' | sort -k4 -nr
+        for var in $(printenv | cut -d= -f1); do
+          length=$(printenv $var | wc -c)
+          if [ $length -gt 10000 ]; then
+            echo "Variable: $var, Length: $length"
+          fi
+        done
