@@ -64,14 +64,9 @@ runs:
         file-extension: ${{ inputs.file-extension }}
         file-path: ${{ inputs.file-path }}
 
-    - name: Check environment variables length
+    - name: Check environment variables safely
       shell: bash
       if: always()
       run: |
-        printenv | awk -F= '{ print "Variable:", $1, "Length:", length($0) }' | sort -k4 -nr
-        for var in $(printenv | cut -d= -f1); do
-          length=$(printenv $var | wc -c)
-          if [ $length -gt 10000 ]; then
-            echo "Variable: $var, Length: $length"
-          fi
-        done
+        echo "Checking environment variables via /proc/self/environ:"
+        tr '\0' '\n' < /proc/self/environ | head -20 | awk -F= '{print "Var:", $1, "Length:", length($0)}'
