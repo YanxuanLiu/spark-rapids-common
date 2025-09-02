@@ -62,4 +62,4 @@ runs:
         check-modified-files-only: ${{ inputs.check-modified-files-only }}
         base-branch: ${{ inputs.base-branch }}
         file-extension: ${{ inputs.file-extension }}
-        file-path: ${{ inputs.file-path }}
+        # file-path: ${{ inputs.file-path }}
