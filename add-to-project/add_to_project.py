@@ -33,6 +33,7 @@ MAVEN_NAMESPACE = "http://maven.apache.org/POM/4.0.0"
 ROADMAP_REPOSITORIES = {
     "NVIDIA/cudf-spark",
     "NVIDIA/cudf-spark-jni",
+    "YanxuanLiu/spark-rapids-jni",
 }
 VERSION_PATTERN = re.compile(
     r"^(\d{2}\.(?:0[1-9]|1[0-2]))(?:\.\d+)*(?:-[0-9A-Za-z][0-9A-Za-z.-]*)?$"
